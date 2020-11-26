@@ -1,9 +1,6 @@
 package com.springexample.dependecyinjection;
 
-import com.springexample.dependecyinjection.controllers.ConstructorInjectedController;
-import com.springexample.dependecyinjection.controllers.Controller1;
-import com.springexample.dependecyinjection.controllers.PropertyInjectedController;
-import com.springexample.dependecyinjection.controllers.SetterInjectedController;
+import com.springexample.dependecyinjection.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -25,6 +22,9 @@ public class DependecyInjectionApplication {
 
         ConstructorInjectedController cic = (ConstructorInjectedController) app.getBean("constructorInjectedController");
         System.out.println(cic.getString()+" from constructor injected controller");
+
+        I18NController i18n = (I18NController) app.getBean("i18NController");
+        System.out.println(i18n.sayHello());
 
 
     }
