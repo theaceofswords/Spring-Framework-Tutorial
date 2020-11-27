@@ -1,20 +1,25 @@
 package com.springexample.petclinic.services.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.springexample.petclinic.model.BaseEntity;
 
-public abstract class AbstractMapService<T,ID> {
-    protected Map<ID, T> map = new HashMap<>();
+import java.util.*;
+
+public abstract class AbstractMapService<T extends BaseEntity,ID> {
+    protected Map<Long, T > map = new HashMap<>();
     Set<T> findAll(){
         return new HashSet<>(map.values());
     }
     T findById(ID id){
         return map.get(id);
     }
-    T save(ID id,T object){
-        map.put(id,object);
+    T save(T object){
+        if(object!=null){
+            if(object.getId()==null){
+                object.setId(generateId());
+            }
+            map.put(object.getId(),object);
+        }else throw new RuntimeException("Null Object");
+
         return object;
     }
     void deleteById(ID id){
@@ -22,5 +27,17 @@ public abstract class AbstractMapService<T,ID> {
     }
     void delete(T object){
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    }
+    private Long generateId(){
+        Long nextId = null;
+
+        try {
+            do {
+                nextId = (long) (Math.random()*(1000-100+1)+100);
+            }while (map.containsKey(nextId));
+        }catch (NoSuchElementException e){
+            System.out.println(e.getMessage());
+        }
+        return nextId;
     }
 }
