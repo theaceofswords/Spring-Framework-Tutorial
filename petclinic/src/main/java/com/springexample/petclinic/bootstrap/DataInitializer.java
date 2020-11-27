@@ -4,8 +4,6 @@ import com.springexample.petclinic.model.Owner;
 import com.springexample.petclinic.model.Vet;
 import com.springexample.petclinic.services.OwnerService;
 import com.springexample.petclinic.services.VetService;
-import com.springexample.petclinic.services.map.OwnerMapService;
-import com.springexample.petclinic.services.map.VetMapService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +13,11 @@ public class DataInitializer implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataInitializer() {
-        this.ownerService = new OwnerMapService();
-        this.vetService = new VetMapService();
+    public DataInitializer(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
+
 
     @Override
     public void run(String... args) throws Exception {
