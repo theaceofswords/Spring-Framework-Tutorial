@@ -18,9 +18,9 @@
     <tbody>
     <tr th:each="vet:${vets}">
         <td th:text="${vet.id}">ID</td>
-        <td th:text="${vet.firstName} + ${vet.lastName}">Name</td>
+        <td th:text="${vet.firstName}+ ${vet.lastName}">Name></td>
 
-        <td>Phone</td>
+        <td th:text="${vet.telephone}">Phone</td>
     </tr>
     </tbody>
 </table>

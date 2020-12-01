@@ -10,4 +10,8 @@ public class IndexController {
     private String index(){                         //match to  this
         return "index";
     }
+    @RequestMapping({"/oups"})
+    public String errorPage(){
+        return "Owners/findowners";
+    }
 }

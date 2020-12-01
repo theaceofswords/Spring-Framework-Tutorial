@@ -17,9 +17,12 @@ public class OwnerController {
     @RequestMapping({"","/index","/index.html"})
     public String listOwner(Model model){
         model.addAttribute("owners",ownerService.findAll()); // the findAll returns a set to  iterate over
-
-
-
         return "Owners/index";
     }
+
+    @RequestMapping({"/find"})
+    public String findOwners(){
+        return "Owners/findowners";
+    }
+
 }
