@@ -17,6 +17,13 @@ public class Ingredients {
     @OneToOne(fetch = FetchType.EAGER)                       //to show intent
     private UnitOfMeasure uom;
 
+    public Ingredients(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+    }
+    public Ingredients(){}
+
     public void setId(Long id) {
         this.id = id;
     }
