@@ -10,7 +10,8 @@ public class Owner extends Person {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "owner") //deleting owner will delete pets
     private Set<Pet> pets = new HashSet<>();
 
-
+    @Column
+    private String nickName;
 
     public Set<Pet> getPets() {
         return pets;
@@ -20,5 +21,11 @@ public class Owner extends Person {
         this.pets = pets;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
 
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 }

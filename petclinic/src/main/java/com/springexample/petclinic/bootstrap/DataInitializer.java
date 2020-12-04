@@ -1,10 +1,7 @@
 package com.springexample.petclinic.bootstrap;
 
 import com.springexample.petclinic.model.*;
-import com.springexample.petclinic.services.OwnerService;
-import com.springexample.petclinic.services.PetTypeService;
-import com.springexample.petclinic.services.VetSpecialityService;
-import com.springexample.petclinic.services.VetService;
+import com.springexample.petclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +14,17 @@ public class DataInitializer implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final VetSpecialityService vetSpecialityService;
+    private final VisitService visitService;
 
     public DataInitializer(OwnerService ownerService, VetService vetService,
-                           PetTypeService petTypeService, VetSpecialityService vetSpecialityService) {
+                           PetTypeService petTypeService, VetSpecialityService vetSpecialityService,
+                           VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.vetSpecialityService = vetSpecialityService;
+
+        this.visitService = visitService;
     }
 
 
@@ -43,8 +44,10 @@ public class DataInitializer implements CommandLineRunner {
         owner1.setAddress("123 abcde");
         owner1.setCity("Miami");
         owner1.setTelephone("123455667");
+        owner1.setNickName("white");
         ownerService.save(owner1);
-
+        System.out.println(ownerService.findByNickName("white").getFirstName());
+       // System.out.println(ownerService.findByLastName("Jackson").getFirstName());
         Owner owner2 = new Owner();
 
         owner2.setFirstName("Greg");
@@ -96,6 +99,16 @@ public class DataInitializer implements CommandLineRunner {
 
         ownerService.save(owner1);
         ownerService.save(owner2);
+
+        VisitDetails visitor1 = new VisitDetails();
+        visitor1.setPet(michealsPet);
+        visitor1.setDescription("Teeth inspection");
+        visitor1.setLocalDate(LocalDate.now());
+
+        VisitDetails visitor2 = new VisitDetails();
+        visitor2.setPet(gregsPet);
+        visitor2.setLocalDate(LocalDate.now());
+        visitor2.setDescription("Grooming");
 
         VetSpeciality radiology = new VetSpeciality();
         radiology.setDescription("Radiology");

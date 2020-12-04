@@ -2,14 +2,17 @@ package com.springexample.petclinic.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+
 @Entity
 @Table(name = "visit")
 public class VisitDetails extends BaseEntity {
     @Column(name = "date")
     private LocalDate localDate;
+
     @Column(name = "description")
     private String description;
-    @Column(name="Pet")
+
+
     @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;

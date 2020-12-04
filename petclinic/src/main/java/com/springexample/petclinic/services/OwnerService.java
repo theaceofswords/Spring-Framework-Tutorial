@@ -4,5 +4,7 @@ import com.springexample.petclinic.model.Owner;
 
 public interface OwnerService extends CrudServices<Owner,Long> {
     Owner findByLastName(String name);
+    Owner findByNickName(String name);
+
 
 }
